@@ -33,27 +33,35 @@ function checkDolphinType(){
     // Find the sum and average of the letters in the input (both for real value and for scrabble value)
     let largestLetter = 0;
     let smallestLetter = 26;
+    let firstValidLetter = 0;
+    let lastValidLetter = 0;
+    let totalValidCharacterCount = 0;
     for (let i = 0; i < userInput.length; i++){
         let character = userInput.charCodeAt(i) - 64;
         if (character >= 1 && character <= 26){
+            if (firstValidLetter == 0){ firstValidLetter = character}
+            lastValidLetter = character;
+
             if (character < smallestLetter){ smallestLetter = character; }
             if (character > largestLetter){ largestLetter = character; }
+
             seedSum += character;
+            totalValidCharacterCount += 1;
             uncommonLetterScore += Math.pow(scrabbleConversions[userInput[i]], 2);
         }
     }
+    let firstLastLetterDifference = Math.abs(firstValidLetter - lastValidLetter);
     let range = largestLetter - smallestLetter;
-    average = seedSum/userInput.length;
-    uncommonLetterScore = uncommonLetterScore/userInput.length;
+    average = seedSum/totalValidCharacterCount;
+    uncommonLetterScore = Math.sqrt(uncommonLetterScore/totalValidCharacterCount);
     // Find standard deviation (done after we have the average because average is necessary for the calculation)
-    let firstLastLetterDifference = Math.abs(userInput.charCodeAt(0) - userInput.charCodeAt(userInput.length - 1));
     for (let i = 0; i < userInput.length; i++){
         let character = userInput.charCodeAt(i) - 64;
-        if (character >= 65 && character <= 90){
-            standardDeviation += Math.pow(((userInput[i] - 64) - average), 2);
+        if (character >= 1 && character <= 26){
+            standardDeviation += Math.pow((character - average), 2);
         }
     }
-    standardDeviation = Math.sqrt(standardDeviation/userInput.length);
+    standardDeviation = Math.sqrt(standardDeviation/totalValidCharacterCount);
 
     percentBottlenose = Math.round(((27-average)/26) * 100); // An average letter of 'A' achieves a top bottlenose score
     percentOrca       = Math.round((firstLastLetterDifference/26) * 100); // A larger difference means more percent orca
@@ -94,5 +102,6 @@ window.onload = window.onresize = function() {
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
     canvas.height = window.innerHeight * 0.7;
+    checkDolphinType();
     drawBarChart();
 }
