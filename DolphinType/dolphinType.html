@@ -1,12 +1,21 @@
 <!DOCTYPE HTML>
 <head>
-    
+    <link rel="stylesheet" href="dolphinType.css">
 </head>
 
 
-<body>
-    <h1>Find out what type of Dolphin you are</h1>
+<body style="background-color: rgb(38, 103, 234);">
     <div class="navbar">
-        
+        <button class="navbarButton">Back to main page</button>
+        <button class="navbarButton">Games</button>
+        <button class="navbarButton">Quiz</button>
+        <button class="navbarButton">Dolphin Facts</button>
+    </div>
+    <h1>Find out what type of Dolphin you are</h1>
+    <canvas class="barChartCanvas" id="canvas" alt="Unavailable"></canvas>
+    <div class="userInput">
+        <textarea class="userInputTextBox" id = "userInputTextBox">Enter your name here...</textarea>
+        <button onclick="checkDolphinType()">Find out what type of dolphin you are</button>
     </div>
 </body>
+<script src="dolphinType.js"></script>

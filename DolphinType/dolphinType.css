@@ -1,0 +1,36 @@
+.barChartCanvas{
+    border: solid;
+    border-width: 3px;
+    border-color: black;
+    border-radius: 5px;
+    margin-left: 4%;
+}
+
+.navbar{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+.navbarButton{
+    width: 24.5%;
+    margin: 0%;
+    padding: 0%;
+}
+
+.userInput{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+.userInputTextBox{
+    width:80%;
+    height:100%;
+}
+
+h1{
+    text-align: center;
+}
