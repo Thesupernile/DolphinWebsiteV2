@@ -74,7 +74,7 @@ function checkDolphinType(){
 
 
 function drawBarChart(){
-    let barWidth = canvas.width / 15;
+    let barWidth = canvas.width / 10;
     let barPositionIncrement = canvas.width / 6;
     let barPositionOffsetY = 0;
     let maxBarHeight = canvas.height - 10 - barPositionOffsetY;
