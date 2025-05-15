@@ -6,13 +6,60 @@ let percentSpinner    = 0;
 let percentRiver      = 0;
 let percentBionic     = 0;
 
+const scrabbleConversions = {
+    'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1,
+    'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8,
+    'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1,
+    'P': 3, 'Q': 10,'R': 1, 'S': 1, 'T': 1,
+    'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4,
+    'Z': 10
+}
+
 
 function checkDolphinType(){
-    percentBottlenose = Math.round(Math.random() * 100);
-    percentOrca       = Math.round(Math.random() * 100);
-    percentSpinner    = Math.round(Math.random() * 100);
-    percentRiver      = Math.round(Math.random() * 100);
-    percentBionic     = Math.round(Math.random() * 100);
+    // So the way this works is werid but kinda cool. Bottlenose percent is based off of the average value of the letters in your name
+    // Orca is based on the difference between the first and last letter
+    // Spinner is based on the range of letters in your name
+    // River is based on the standard deviation of the letters in your name
+    // Bionic is based on the number of uncommon letters in your name 
+
+    let inputBox = document.getElementById("userInputTextBox");
+    let userInput = (inputBox.value).toUpperCase();
+    let seedSum = 0;
+    let standardDeviation = 0;
+    let average = 0;
+    let uncommonLetterScore = 0; // We literally just find the average scrabble value of the letters in the name
+
+    // Find the sum and average of the letters in the input (both for real value and for scrabble value)
+    let largestLetter = 0;
+    let smallestLetter = 26;
+    for (let i = 0; i < userInput.length; i++){
+        let character = userInput.charCodeAt(i) - 64;
+        if (character >= 1 && character <= 26){
+            if (character < smallestLetter){ smallestLetter = character; }
+            if (character > largestLetter){ largestLetter = character; }
+            seedSum += character;
+            uncommonLetterScore += Math.pow(scrabbleConversions[userInput[i]], 2);
+        }
+    }
+    let range = largestLetter - smallestLetter;
+    average = seedSum/userInput.length;
+    uncommonLetterScore = uncommonLetterScore/userInput.length;
+    // Find standard deviation (done after we have the average because average is necessary for the calculation)
+    let firstLastLetterDifference = Math.abs(userInput.charCodeAt(0) - userInput.charCodeAt(userInput.length - 1));
+    for (let i = 0; i < userInput.length; i++){
+        let character = userInput.charCodeAt(i) - 64;
+        if (character >= 65 && character <= 90){
+            standardDeviation += Math.pow(((userInput[i] - 64) - average), 2);
+        }
+    }
+    standardDeviation = Math.sqrt(standardDeviation/userInput.length);
+
+    percentBottlenose = Math.round(((27-average)/26) * 100); // An average letter of 'A' achieves a top bottlenose score
+    percentOrca       = Math.round((firstLastLetterDifference/26) * 100); // A larger difference means more percent orca
+    percentSpinner    = Math.round((range/26) * 100); // A large range means a larger percent spinner dolphin
+    percentRiver      = Math.round((1-(standardDeviation/13)) * 100);
+    percentBionic     = Math.round((uncommonLetterScore/10) * 100); // Higher uncommon letter score, higher bionic death dolphin percentage
     drawBarChart();
 }
 

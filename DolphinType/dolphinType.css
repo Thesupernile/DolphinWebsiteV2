@@ -31,6 +31,12 @@
     height:100%;
 }
 
+.labelBox{
+    width: 90%;
+    margin-left: 5%;
+    color: aliceblue;
+}
+
 h1{
     text-align: center;
 }
