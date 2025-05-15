@@ -17,7 +17,8 @@ const scrabbleConversions = {
 
 
 function checkDolphinType(){
-    // So the way this works is werid but kinda cool. Bottlenose percent is based off of the average value of the letters in your name
+    // So the way this works is werid but kinda cool. 
+    // Bottlenose percent is based off of the average value of the letters in your name
     // Orca is based on the difference between the first and last letter
     // Spinner is based on the range of letters in your name
     // River is based on the standard deviation of the letters in your name
