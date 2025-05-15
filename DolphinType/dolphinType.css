@@ -37,6 +37,11 @@
     color: aliceblue;
 }
 
+.dolphinDescriptionDiv{
+    width: 90%;
+    margin: 5%;
+}
+
 h1{
     text-align: center;
 }
