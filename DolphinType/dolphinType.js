@@ -15,8 +15,16 @@ const scrabbleConversions = {
     'Z': 10
 }
 
+function dolphinButtonClicked(){
+    document.getElementById("loadingScreen").style.display = "block";
+    timeout = setTimeout(checkDolphinType, 2000);
+}
+
 
 function checkDolphinType(){
+    // Removes the loader
+    document.getElementById("loadingScreen").style.display = "none";
+
     // So the way this works is werid but kinda cool. 
     // Bottlenose percent is based off of the average value of the letters in your name
     // Orca is based on the difference between the first and last letter

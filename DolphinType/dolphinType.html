@@ -6,8 +6,9 @@
 </head>
 
 <body>
-    <div id="loadingScreen">
-        <img src="../artwork/loadingAnimation.gif" style="position: absolute; left: 40%; top: 30%;"></img>
+    <div id="loadingScreen" style="position: absolute; left: 40%; top: 30%;">
+        <img src="../artwork/loadingAnimation.gif"></img>
+        <p style="text-align: center; color: aliceblue;"> Loading... </p>
     </div>
     <div id="mainPage" style="display: none;">
         <div class="navbar">
@@ -21,7 +22,7 @@
         <div><p class="labelBox">.......................................Bottlenose Dolphin......................................Orca.........................................Spinner Dolphin.................................River Dolphin.............................Bionic Death Dolphin..............................</p></div>
         <div class="userInput">
             <textarea class="userInputTextBox" id = "userInputTextBox">Type your name here </textarea>
-            <button onclick="checkDolphinType()" style="margin-top: 0%; margin-left: 2%;">Find out what type of dolphin you are</button>
+            <button onclick="dolphinButtonClicked()" style="margin-top: 0%; margin-left: 2%;">Find out what type of dolphin you are</button>
         </div>
         <div>
             <h1> What your dolphin type means: </h1>
