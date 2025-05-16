@@ -86,11 +86,19 @@ function checkDolphinType(){
     }
     standardDeviation = Math.sqrt(standardDeviation/totalValidCharacterCount);
 
-    percentBottlenose = Math.round(((27-average)/26) * 100); // An average letter of 'A' achieves a top bottlenose score
-    percentOrca       = Math.round((firstLastLetterDifference/26) * 100); // A larger difference means more percent orca
-    percentSpinner    = Math.round((range/26) * 100); // A large range means a larger percent spinner dolphin
-    percentRiver      = Math.round((1-(standardDeviation/13)) * 100);
-    percentBionic     = Math.round((uncommonLetterScore/10) * 100); // Higher uncommon letter score, higher bionic death dolphin percentage
+    let scoreBottlenose = Math.round(((27-average)/26) * 100); // An average letter of 'A' achieves a top bottlenose score
+    let scoreOrca       = Math.round((firstLastLetterDifference/26) * 100); // A larger difference means more percent orca
+    let scoreSpinner    = Math.round((range/26) * 100); // A large range means a larger percent spinner dolphin
+    let scoreRiver      = Math.round((1-(standardDeviation/13)) * 100);
+    let scoreBionic     = Math.round((uncommonLetterScore/10) * 100); // Higher uncommon letter score, higher bionic death dolphin percentage
+    let totalScore = scoreBottlenose + scoreBionic + scoreOrca + scoreRiver + scoreSpinner;
+
+    percentBottlenose   = scoreBottlenose/totalScore * 100;
+    percentOrca         = scoreRiver/totalScore * 100;
+    percentSpinner      = scoreSpinner/totalScore * 100;
+    percentRiver        = scoreRiver/totalScore * 100;
+    percentBionic       = scoreBionic/totalScore * 100;
+
     drawBarChart();
 }
 
