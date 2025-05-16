@@ -55,6 +55,16 @@
     font-family: Garamond, serif;
 }
 
+.resultsScreen{
+    position: absolute; 
+    left: 10%; 
+    top: 20%; 
+    width: 80%; 
+    height: 60%; 
+    background-color: aliceblue; 
+    display: none;
+}
+
 h1{
     text-align: center;
     text-decoration: underline;
@@ -63,6 +73,7 @@ h1{
 
 body {
   background-image: url("../artwork/background.jpeg");
+  background-size: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

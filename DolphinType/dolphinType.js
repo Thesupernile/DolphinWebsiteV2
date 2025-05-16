@@ -31,7 +31,7 @@ function dolphinButtonClicked(){
     let loadMessageNum = Math.floor(Math.random() * 9);
     document.getElementById("loadingScreen").style.display = "block";
     document.getElementById("loadText").innerHTML = loadingScreenMessages[loadMessageNum];
-    timeout = setTimeout(checkDolphinType, 2000);
+    timeout = setTimeout(checkDolphinType, 500);
 }
 
 
