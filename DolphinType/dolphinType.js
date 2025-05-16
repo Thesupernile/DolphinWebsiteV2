@@ -99,10 +99,28 @@ function drawBarChart(){
 }
 
 // Resizes the canvas when the window is resized
-window.onload = window.onresize = function() {
+
+function displayLoadingScreen(){
+    loadTimeout = setTimeout(pageLoaded, 500);
+}
+
+function pageLoaded(){
+    resizePage();
+    document.getElementById("mainPage").style.display = "block";
+    document.getElementById("loadingScreen").style.display = "none";
+}
+
+function resizePage(){
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
     canvas.height = window.innerHeight * 0.7;
     checkDolphinType();
     drawBarChart();
+}
+
+window.onload = displayLoadingScreen();
+
+
+window.onresize = function() {
+    resizePage();
 }
