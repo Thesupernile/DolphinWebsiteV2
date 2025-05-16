@@ -15,8 +15,22 @@ const scrabbleConversions = {
     'Z': 10
 }
 
+const loadingScreenMessages = {
+    0: "Loading...",
+    1: "Finding fishes...",
+    2: "Dodging sharks...",
+    3: "Blowing bubbles...",
+    4: "Speaking calculus...",
+    5: "Cleaning the oceans...",
+    6: "Logging star movements...",
+    7: "Tracking dolphin types...",
+    8: "Searching for dolphins..."
+}
+
 function dolphinButtonClicked(){
+    let loadMessageNum = Math.floor(Math.random() * 9);
     document.getElementById("loadingScreen").style.display = "block";
+    document.getElementById("loadText").innerHTML = loadingScreenMessages[loadMessageNum];
     timeout = setTimeout(checkDolphinType, 2000);
 }
 
@@ -109,6 +123,8 @@ function drawBarChart(){
 // Resizes the canvas when the window is resized
 
 function displayLoadingScreen(){
+    let loadMessageNum = Math.floor(Math.random() * 9);
+    document.getElementById("loadText").innerHTML = loadingScreenMessages[loadMessageNum];
     loadTimeout = setTimeout(pageLoaded, 500);
 }
 

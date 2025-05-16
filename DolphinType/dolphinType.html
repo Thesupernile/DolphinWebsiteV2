@@ -8,7 +8,7 @@
 <body>
     <div id="loadingScreen" style="position: absolute; left: 40%; top: 30%;">
         <img src="../artwork/loadingAnimation.gif"></img>
-        <p style="text-align: center; color: aliceblue;"> Loading... </p>
+        <p id="loadText" style="text-align: center; color: aliceblue;"> Loading... </p>
     </div>
     <div id="mainPage" style="display: none;">
         <div class="navbar">
@@ -17,7 +17,11 @@
             <button class="navbarButton">Quiz</button>
             <button class="navbarButton">Dolphin Facts</button>
         </div>
-        <h1>Discover your dolphin type</h1>
+        <br>
+        <br>
+        <img src="../artwork/TitleText.png" alt="Discover your dolphin type" style="position: relative; left: 15%; width: 70%;"></img>
+        <br>
+        <br>
         <canvas class="barChartCanvas" id="canvas" alt="Unavailable"></canvas>
         <div><p class="labelBox">.......................................Bottlenose Dolphin......................................Orca.........................................Spinner Dolphin.................................River Dolphin.............................Bionic Death Dolphin..............................</p></div>
         <div class="userInput">
