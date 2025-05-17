@@ -99,6 +99,24 @@ function checkDolphinType(){
     percentRiver        = scoreRiver/totalScore * 100;
     percentBionic       = scoreBionic/totalScore * 100;
 
+    // Display the result
+    document.getElementById("resultsScreen").style.display = "inline";
+    if (percentBottlenose >= percentOrca && percentBottlenose >= percentSpinner && percentBottlenose >= percentRiver && percentBottlenose >= percentBionic){
+        document.getElementById("bottlenoseResult").style.display = "inline";
+    }
+    else if (percentOrca >= percentBottlenose && percentOrca >= percentSpinner && percentOrca >= percentRiver && percentOrca >= percentBionic){
+        document.getElementById("orcaResult").style.display = "inline";
+    }
+    else if (percentSpinner >= percentBottlenose && percentSpinner >= percentOrca && percentSpinner >= percentRiver && percentSpinner >= percentBionic){
+        document.getElementById("spinnerResult").style.display = "inline";
+    }
+    else if (percentRiver >= percentBottlenose && percentRiver >= percentOrca && percentRiver >= percentSpinner && percentRiver >= percentBionic){
+        document.getElementById("riverResult").style.display = "inline";
+    }
+    else if (percentBionic >= percentBottlenose && percentBionic >= percentOrca && percentBionic >= percentSpinner && percentBionic >= percentRiver){
+        document.getElementById("bionicResult").style.display = "inline";
+    }
+
     drawBarChart();
 }
 
@@ -131,9 +149,10 @@ function drawBarChart(){
 function closeResultsMenu(){
     document.getElementById("resultsScreen").style.display = "none";
     document.getElementById("bottlenoseResult").style.display = "none";
-    document.getElementById("bottlenoseResult").style.display = "none";
-    document.getElementById("bottlenoseResult").style.display = "none";
-    document.getElementById("bottlenoseResult").style.display = "none";
+    document.getElementById("orcaResult").style.display = "none";
+    document.getElementById("spinnerResult").style.display = "none";
+    document.getElementById("riverResult").style.display = "none";
+    document.getElementById("bionicResult").style.display = "none";
 }
 
 // Resizes the canvas when the window is resized
@@ -154,7 +173,6 @@ function resizePage(){
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
     canvas.height = window.innerHeight * 0.7;
-    checkDolphinType();
     drawBarChart();
 }
 

@@ -67,6 +67,12 @@
     border-color: rgb(1, 15, 96);
     border-width: 4px;
     border-radius: 6px;
+    display: none;
+}
+
+.dolphinResult {
+    margin: 5%;
+    display: none;
 }
 
 h1{
