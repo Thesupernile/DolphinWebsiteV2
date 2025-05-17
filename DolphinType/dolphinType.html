@@ -1,9 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <head>
     <link rel="stylesheet" href="dolphinType.css">
+    <link rel="stylesheet" href="../navbar.css">
     <title>Discover your dolphin type</title>
     <link rel="icon" type="image/x-icon" href="../Artwork/icon.png">
-</head>
+</head> 
 
 <body>
     <div id="loadingScreen" style="position: absolute; left: 40%; top: 30%;">
@@ -12,19 +13,29 @@
     </div>
 
     <div id="resultsScreen" class="resultsScreen">
-        <p id="loadText" style="text-align: center; color: aliceblue;"> Loading... </p>
+        <div id="bottlenoseResult" style="margin: 5%;">
+            <p>
+            <image align="right" style="width: 40%;" src="..\Artwork\Bottlenose.gif" alt="Really cool bottlenose dolphin animation you're missing out on right now"></image>
+            You are a bottlenose dolphin!</p>
+            <br>
+            <br>
+            <p>Bottlenose dolphins are the arcetypial dolphin, having gained fame from movies and their presense in aquatic parks however
+                they are not the most common dolphin worldwide. 
+            </p>
+        </div>
+        <button style="margin: 5%;" onclick="closeResultsMenu()">Close this menu</button>
     </div>
 
     <div id="mainPage" style="display: none;">
-        <div class="navbar">
-            <button class="navbarButton">Back to main page</button>
-            <button class="navbarButton">Games</button>
-            <button class="navbarButton">Quiz</button>
-            <button class="navbarButton">Dolphin Facts</button>
-        </div>
-        <br>
-        <br>
         <img src="../Artwork/TitleText.png" alt="Discover your dolphin type" style="position: relative; left: 15%; width: 70%;"></img>
+        <br>
+        <br>
+        <div class="navbar">
+            <a href="../index.html"><button class="navbarButton">Back to main page</button></a>
+            <a href="../Games/games.html"><button class="navbarButton">Games</button></a>
+            <a href="../DolphinQuiz/dolphinQuiz.html"><button class="navbarButton">Quiz</button></a>
+            <a href="../Facts/facts.html"><button class="navbarButton">Dolphin Facts</button></a>
+        </div>
         <br>
         <br>
         <canvas class="barChartCanvas" id="canvas" alt="Unavailable"></canvas>

@@ -128,6 +128,14 @@ function drawBarChart(){
     
 }
 
+function closeResultsMenu(){
+    document.getElementById("resultsScreen").style.display = "none";
+    document.getElementById("bottlenoseResult").style.display = "none";
+    document.getElementById("bottlenoseResult").style.display = "none";
+    document.getElementById("bottlenoseResult").style.display = "none";
+    document.getElementById("bottlenoseResult").style.display = "none";
+}
+
 // Resizes the canvas when the window is resized
 
 function displayLoadingScreen(){
