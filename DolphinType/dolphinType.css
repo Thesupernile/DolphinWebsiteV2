@@ -71,7 +71,10 @@
 }
 
 .dolphinResult {
-    margin: 5%;
+    font-size: larger;
+    color: aliceblue;
+    font-family: Garamond, serif;
+    width: 90%;
     display: none;
 }
 
