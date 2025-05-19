@@ -2,6 +2,8 @@ const ctx = canvas.getContext("2d");
 playerAlive = false;
 dolphinPostionX = 10;
 dolphinPositionY = 10;
+playerWidth = 100;
+playerHeight = 100;
 score = 0;
 obstacles = [];
 
@@ -33,7 +35,14 @@ function drawCanvas(){
 }
 
 function checkForCollisions(){
-
+    for (obstacle in obstacles){
+        // For every obstacle, check if it intersects with the player //
+        if ((obstacle.positionX <= dolphinPostionX && obstacle.positionX + obstacle.width >= dolphinPostionX + playerWidth)){
+            if (obstacle.positionY <= dolphinPositionY && obstacle.positionY + obstacle.width >= dolphinPositionY + playerHeight){
+                playerAlive = false;
+            }
+        }
+    }
 }
 
 function runGameFrame(){
@@ -57,6 +66,18 @@ function runGameFrame(){
         // The game will run at aprox 60fps with delay time of 17ms //
         nextFrame = setTimeout(runGameFrame, 17);
     }
+}
+
+function createObstacle(obsPosX, obsPosY){
+    obstacle = new obstacle;
+    obstacle.positionX = obsPosX;
+    obstacle.positionY = obsPosY;
+    obstacle.width = 100;
+    obstacle.height = 100;
+
+    // Give the obstacle a random obstacle image//
+    // TEMP CODE // 
+    obstacle.image = "";
 }
 
 function playerDied(){
