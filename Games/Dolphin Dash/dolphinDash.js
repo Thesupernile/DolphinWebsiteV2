@@ -5,6 +5,7 @@ dolphinPositionY = 10;
 playerWidth = 100;
 playerHeight = 100;
 score = 0;
+numberOfObstacles = 3;
 obstacles = [];
 
 obstacle = {
@@ -46,8 +47,19 @@ function checkForCollisions(){
 }
 
 function runGameFrame(){
-    // Move the obstacles towards the player //
+    let positionXIncrement = 10;
 
+    // Move the obstacles towards the player //
+    for (obstacle in obstacles){
+        obstacle.x -= positionXIncrement;
+        // Remove the obstacle if it is off the other side of the map
+        if (obstacle.positionX + obstacle.width < 0){
+            let index = obstacles.indexOf(obstacle);
+            obstacles.splice(index, 1);
+            // Temp Code //
+            createObstacle(canvas.width, 0);
+        }
+    }
 
     // Check for collisions //
     checkForCollisions();
