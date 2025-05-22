@@ -24,7 +24,7 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    ctx.drawImage("../Assets/movingDolphin.gif", dolphinPostionX, dolphinPositionY);
+    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY);
 
     // Draw the obstacles //
     for (let i = 0; i < obstacles.length(); i++){
