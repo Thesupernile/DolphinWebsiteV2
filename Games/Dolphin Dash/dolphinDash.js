@@ -81,29 +81,38 @@ function runGameFrame(){
 }
 
 function createObstacle(obsPosX, obsPosY){
-    obstacle = new obstacle;
-    obstacle.positionX = obsPosX;
-    obstacle.positionY = obsPosY;
-    obstacle.width = 100;
-    obstacle.height = 100;
+    obstacle = {
+        positionX: obsPosX,
+        positionY: obsPosY,
+        width: 100,
+        height: 100,
+        // TEMP CODE // 
+        image: ""
+    }
 
-    // Give the obstacle a random obstacle image//
-    // TEMP CODE // 
-    obstacle.image = "";
+    obstacles.push(obstacle);
 }
 
 function playerDied(){
     // Bring up the player death screen //
-
+    document.getElementById("deathScreen").style.display = "inline";
 }
 
 function gameStarted(){
     // Revive the player and hide the welcome screen/death screen //
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("deathScreen").style.display = "none";
     playerAlive = true;
     score = 0;
+    obstacles = [];
+    for (let i = 0; i < numberOfObstacles; i++){
+        // Temp Code //
+        createObstacle(canvas.width, 0);    
+    }
+    runGameFrame();
 }
 
-window.onresize = function() {
+window.onload = window.onresize = function() {
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
     canvas.height = window.innerHeight * 0.7;

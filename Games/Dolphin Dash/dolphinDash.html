@@ -1,28 +1,28 @@
 <head>
     <link rel="stylesheet" href="../../navbar.css">
     <title>Dolphin Games</title>
-    <link rel="icon" type="image/x-icon" href="../Artwork/icon.png">
+    <link rel="icon" type="image/x-icon" href="../../Artwork/icon.png">
 </head>
 
 <body>
-    <h1>Here be dolphins...</h1>
     <div class="navbar">
         <a href="../../index.html"><button class="navbarButton">Back to main page</button></a>
         <a href="../../Games/games.html"><button class="navbarButton">Games</button></a>
         <a href="../../DolphinType/dolphinType.html"><button class="navbarButton">Discover you dolphin type</button></a>
         <a href="../../Facts/facts.html"><button class="navbarButton">Dolphin Facts</button></a>
     </div>
-    <div id="welcomeScreen">
+    <br>
+    <div id="welcomeScreen" style="display: inline;" class="infoScreen">
         <h1 style="text-align: center;">Welcome to Dolphin Dash</h1>
-        <p></p>
-        <button>Press to play</button>
+        <p>The aim of the game is to score as many points as possible by guiding your dolphin around the obstacles in it's path.</p>
+        <button onclick="gameStarted()">Press to play</button>
     </div>
-    <div id="deathScreen">
+    <div id="deathScreen" style="display: none;" class="infoScreen">
         <h1 style="text-align: center;">Game Over</h1>
         <p id="scoreParagraph">Score: 0</p>
-        <button>Press to play again</button>
+        <button onclick="gameStarted()">Press to play again</button>
     </div>
 
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" class="gameCanvas">Unfortunately, your browser does not support dolphin dash</canvas>
 </body>
 <script src="dolphinDash.js"></script>
