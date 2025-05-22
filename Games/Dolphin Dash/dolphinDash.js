@@ -1,7 +1,7 @@
 const ctx = canvas.getContext("2d");
 playerAlive = false;
 dolphinPostionX = 10;
-dolphinPositionY = 10;
+dolphinPositionY = 2;
 playerWidth = 100;
 playerHeight = 100;
 score = 0;
@@ -24,10 +24,10 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY);
+    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY * (canvas.height / 3) );
 
     // Draw the obstacles //
-    for (let i = 0; i < obstacles.length(); i++){
+    for (let i = 0; i < obstacles.length; i++){
         obstacle = obstacles[i];
         ctx.drawImage(obstacle.image, obstacle.positionX, obstacle.positionY);
     }
@@ -112,8 +112,20 @@ function gameStarted(){
     runGameFrame();
 }
 
+document.onkeydown = function(w){
+    if (dolphinPositionY != 0){
+        dolphinPositionY--;
+    }
+}
+
+document.onkeydown = function(s){
+    if (dolphinPositionY != 2){
+        dolphinPositionY++;
+    }
+}
+
 window.onload = window.onresize = function() {
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
-    canvas.height = window.innerHeight * 0.7;
+    canvas.height = window.innerHeight * 0.8;
 }
