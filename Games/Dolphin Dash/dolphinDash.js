@@ -29,7 +29,7 @@ function drawCanvas(){
     // Draw the obstacles //
     for (let i = 0; i < obstacles.length; i++){
         obstacle = obstacles[i];
-        ctx.drawImage(obstacle.image, obstacle.positionX, obstacle.positionY);
+        //ctx.drawImage(obstacle.image, obstacle.positionX, obstacle.positionY);
     }
 
 
@@ -112,17 +112,19 @@ function gameStarted(){
     runGameFrame();
 }
 
-document.onkeydown = function(w){
+function moveDolphinUp(){
     if (dolphinPositionY != 0){
         dolphinPositionY--;
     }
 }
 
-document.onkeydown = function(s){
+function moveDolphinDown(){
     if (dolphinPositionY != 2){
         dolphinPositionY++;
     }
 }
+
+document.body.addEventListener("keydown", moveDolphinUp());
 
 window.onload = window.onresize = function() {
     var canvas = document.getElementById("canvas");
