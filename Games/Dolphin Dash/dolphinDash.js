@@ -50,11 +50,12 @@ function runGameFrame(){
     let positionXIncrement = 10;
 
     // Move the obstacles towards the player //
-    for (obstacle in obstacles){
-        obstacle.positionX -= positionXIncrement;
+    for (let i = 0; i < obstacles.length; i++){
+        let item = obstacles[i];
+        item.positionX -= positionXIncrement;
         // Remove the obstacle if it is off the other side of the fmap
-        if (obstacle.positionX + obstacle.width < 0){
-            let index = obstacles.indexOf(obstacle);
+        if (item.positionX < 0){
+            let index = obstacles.indexOf(item);
             obstacles.splice(index, 1);
             // Temp Code //
             createObstacle(canvas.width, canvas.height/3 + 20);
@@ -82,7 +83,6 @@ function runGameFrame(){
 
 function createObstacle(obsPosX, obsPosY){
     let obstacleInit = new obstacle(obsPosX, obsPosY, "obstacleImage");
-
     obstacles.push(obstacleInit);
 }
 
