@@ -124,6 +124,17 @@ function moveDolphinDown(){
     }
 }
 
+document.body.onkeydown = function(key){
+    switch(key.code){
+        case ("KeyW"):
+            moveDolphinUp();
+            break;
+        case ("KeyS"):
+            moveDolphinDown();
+            break;
+    }
+}
+
 document.body.addEventListener("keydown", moveDolphinUp());
 
 window.onload = window.onresize = function() {
