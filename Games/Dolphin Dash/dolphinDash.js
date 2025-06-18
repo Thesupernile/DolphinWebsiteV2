@@ -8,12 +8,14 @@ score = 0;
 numberOfObstacles = 3;
 obstacles = [];
 
-obstacle = {
-    positionX: 0,
-    positionY: 0,
-    width: 100,
-    length: 100,
-    image: ""
+class obstacle {
+    constructor(positionX, positionY, image){
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.width = 64;
+        this.length = 64;
+        this.image = image;
+    }
 }
 
 
@@ -24,15 +26,13 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY * (canvas.height / 3) );
+    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY * (canvas.height / 3) - 20 );
 
     // Draw the obstacles //
     for (let i = 0; i < obstacles.length; i++){
         obstacle = obstacles[i];
-        //ctx.drawImage(obstacle.image, obstacle.positionX, obstacle.positionY);
+        ctx.drawImage(document.getElementById(obstacle.image), obstacle.positionX, obstacle.positionY);
     }
-
-
 }
 
 function checkForCollisions(){
@@ -51,13 +51,13 @@ function runGameFrame(){
 
     // Move the obstacles towards the player //
     for (obstacle in obstacles){
-        obstacle.x -= positionXIncrement;
-        // Remove the obstacle if it is off the other side of the map
+        obstacle.positionX -= positionXIncrement;
+        // Remove the obstacle if it is off the other side of the fmap
         if (obstacle.positionX + obstacle.width < 0){
             let index = obstacles.indexOf(obstacle);
             obstacles.splice(index, 1);
             // Temp Code //
-            createObstacle(canvas.width, 0);
+            createObstacle(canvas.width, canvas.height/3 + 20);
         }
     }
 
@@ -81,16 +81,9 @@ function runGameFrame(){
 }
 
 function createObstacle(obsPosX, obsPosY){
-    obstacle = {
-        positionX: obsPosX,
-        positionY: obsPosY,
-        width: 100,
-        height: 100,
-        // TEMP CODE // 
-        image: ""
-    }
+    let obstacleInit = new obstacle(obsPosX, obsPosY, "obstacleImage");
 
-    obstacles.push(obstacle);
+    obstacles.push(obstacleInit);
 }
 
 function playerDied(){
@@ -107,7 +100,7 @@ function gameStarted(){
     obstacles = [];
     for (let i = 0; i < numberOfObstacles; i++){
         // Temp Code //
-        createObstacle(canvas.width, 0);    
+        createObstacle(canvas.width - 64, canvas.height/3 + 20 + 32);
     }
     runGameFrame();
 }
