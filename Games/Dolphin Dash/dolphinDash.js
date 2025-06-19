@@ -2,8 +2,8 @@ const ctx = canvas.getContext("2d");
 playerAlive = false;
 dolphinPostionX = 10;
 dolphinPositionY = 2;
-playerWidth = 100;
-playerHeight = 100;
+playerWidth = 128;
+playerHeight = 128;
 score = 0;
 numberOfObstacles = 3;
 obstacles = [];
@@ -18,7 +18,7 @@ class obstacle {
         this.positionX = positionX;
         this.positionY = positionY;
         this.width = 64;
-        this.length = 64;
+        this.height = 64;
         this.image = image;
     }
 }
@@ -41,10 +41,22 @@ function drawCanvas(){
 }
 
 function checkForCollisions(){
-    for (let obstacle in obstacles){
+    for (let i = 0; i < obstacles.length; i++){
+        let item = obstacles[i];
+
+        let dolphinLeft = dolphinPostionX;
+        let dolphinRight = dolphinPostionX + playerWidth;
+        let dolphinTop = ( dolphinPositionY + 1 * (canvas.width / 3) );
+        let dolphinBottom = ( dolphinPositionY + 1 * (canvas.width / 3) ) + playerHeight;
+
+        let itemLeft = item.positionX;
+        let itemRight = item.positionX + item.width;
+        let itemTop = item.positionY;
+        let itemBottom = item.positionY + item.height;
+
         // For every obstacle, check if it intersects with the player //
-        if ((obstacle.positionX <= dolphinPostionX && obstacle.positionX + obstacle.width >= dolphinPostionX + playerWidth)){
-            if (obstacle.positionY <= dolphinPositionY && obstacle.positionY + obstacle.width >= dolphinPositionY + playerHeight){
+        if ((itemRight >= dolphinLeft && itemLeft <= dolphinRight)){
+            if (itemTop >= dolphinBottom && itemBottom <= dolphinTop){
                 playerAlive = false;
             }
         }
