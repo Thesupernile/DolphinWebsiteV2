@@ -8,6 +8,11 @@ score = 0;
 numberOfObstacles = 3;
 obstacles = [];
 
+const DOUBLEOBSTACLESPAWNCHANCE = 4;
+const MAXPOSXOFFSET = 800;
+const OBSTACLEMOVESPEED = 10;
+const SPAWNINTERVAL = 500;
+
 class obstacle {
     constructor(positionX, positionY, image){
         this.positionX = positionX;
@@ -30,13 +35,13 @@ function drawCanvas(){
 
     // Draw the obstacles //
     for (let i = 0; i < obstacles.length; i++){
-        obstacle = obstacles[i];
+        let obstacle = obstacles[i];
         ctx.drawImage(document.getElementById(obstacle.image), obstacle.positionX, obstacle.positionY);
     }
 }
 
 function checkForCollisions(){
-    for (obstacle in obstacles){
+    for (let obstacle in obstacles){
         // For every obstacle, check if it intersects with the player //
         if ((obstacle.positionX <= dolphinPostionX && obstacle.positionX + obstacle.width >= dolphinPostionX + playerWidth)){
             if (obstacle.positionY <= dolphinPositionY && obstacle.positionY + obstacle.width >= dolphinPositionY + playerHeight){
@@ -46,22 +51,14 @@ function checkForCollisions(){
     }
 }
 
+async function obstacleController(){
+    // Spawns new obstacles at a regular time interval
+}
+
 function runGameFrame(){
-    let positionXIncrement = 10;
 
-    // Move the obstacles towards the player //
-    for (let i = 0; i < obstacles.length; i++){
-        let item = obstacles[i];
-        item.positionX -= positionXIncrement;
-        // Remove the obstacle if it is off the other side of the fmap
-        if (item.positionX < 0){
-            let index = obstacles.indexOf(item);
-            obstacles.splice(index, 1);
-            // Temp Code //
-            createObstacle(canvas.width, canvas.height/3 + 20);
-        }
-    }
-
+    moveObstacles();
+    
     // Check for collisions //
     checkForCollisions();
 
@@ -81,7 +78,17 @@ function runGameFrame(){
     }
 }
 
-function createObstacle(obsPosX, obsPosY){
+function createObstacle(obsPosX = null, obsPosY = null){
+    if (obsPosY == null){
+        // Sets the obsPosY to one of the three preset lanes ( +52 used as a spacer)
+        let obsPosFormat = Math.floor(Math.random() * 3);
+        obsPosY = obsPosFormat * (canvas.height/3)  + 64;
+    }
+    if (obsPosX == null){
+        // Sets the obsPosX to the canvas width plus some random offset
+        let obsPosXOffset = Math.floor(Math.random() * MAXPOSXOFFSET);
+        obsPosX = canvas.width + obsPosXOffset;
+    }
     let obstacleInit = new obstacle(obsPosX, obsPosY, "obstacleImage");
     obstacles.push(obstacleInit);
 }
@@ -99,10 +106,23 @@ function gameStarted(){
     score = 0;
     obstacles = [];
     for (let i = 0; i < numberOfObstacles; i++){
-        // Temp Code //
-        createObstacle(canvas.width - 64, canvas.height/3 + 20 + 32);
+        createObstacle();
     }
     runGameFrame();
+    obstacleController();
+}
+
+function moveObstacles(){
+    for (let i = 0; i < obstacles.length; i++){
+        let item = obstacles[i];
+        item.positionX -= OBSTACLEMOVESPEED;
+        // Remove the obstacle if it is off the other side of the map
+        if (item.positionX < 0){
+            let index = obstacles.indexOf(item);
+            obstacles.splice(index, 1);
+            //createObstacle();
+        }
+    }
 }
 
 function moveDolphinUp(){
@@ -125,6 +145,10 @@ document.body.onkeydown = function(key){
         case ("KeyS"):
             moveDolphinDown();
             break;
+        // case ("KeyD"):
+        //     // Sprint
+        //     moveObstacles();
+        //     break;
     }
 }
 
