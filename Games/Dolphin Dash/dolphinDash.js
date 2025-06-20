@@ -1,7 +1,7 @@
 const ctx = canvas.getContext("2d");
 playerAlive = false;
-dolphinPostionX = 10;
-dolphinPositionY = 2;
+dolphPosX = 10;
+dolphPosY = 2;
 playerWidth = 128;
 playerHeight = 128;
 score = 0;
@@ -31,32 +31,34 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    ctx.drawImage(document.getElementById("dolphinImage"), dolphinPostionX, dolphinPositionY * (canvas.height / 3) - 20 );
+    let dolphPosYAbs = dolphPosY * ( canvas.height / 3 ) - 20;
+    ctx.drawImage(document.getElementById("dolphinImage"), dolphPosX, dolphPosYAbs);
 
     // Draw the obstacles //
     for (let i = 0; i < obstacles.length; i++){
-        let obstacle = obstacles[i];
-        ctx.drawImage(document.getElementById(obstacle.image), obstacle.positionX, obstacle.positionY);
+        let obst = obstacles[i];
+        ctx.drawImage(document.getElementById(obst.image), obst.positionX, obst.positionY);
     }
 }
 
 function checkForCollisions(){
     for (let i = 0; i < obstacles.length; i++){
-        let item = obstacles[i];
+        // Known issue where passing over an obstacle in the bottom row causes a collision to be detected
+        let obst = obstacles[i];
 
-        let dolphinLeft = dolphinPostionX;
-        let dolphinRight = dolphinPostionX + playerWidth;
-        let dolphinTop = ( dolphinPositionY + 1 * (canvas.width / 3) );
-        let dolphinBottom = ( dolphinPositionY + 1 * (canvas.width / 3) ) + playerHeight;
+        let dolphinLeft = dolphPosX;
+        let dolphinRight = dolphinLeft + playerWidth;
+        let dolphinTop = ( dolphPosY * (canvas.width / 3) ) - 20;
+        let dolphinBottom = dolphinTop + playerHeight;
 
-        let itemLeft = item.positionX;
-        let itemRight = item.positionX + item.width;
-        let itemTop = item.positionY;
-        let itemBottom = item.positionY + item.height;
+        let obstLeft = obst.positionX;
+        let obstRight = obstLeft + obst.width;
+        let obstTop = obst.positionY;
+        let obstBottom = obstTop + obst.height;
 
         // For every obstacle, check if it intersects with the player //
-        if ((itemRight >= dolphinLeft && itemLeft <= dolphinRight)){
-            if (itemTop >= dolphinBottom && itemBottom <= dolphinTop){
+        if ((obstRight >= dolphinLeft && obstLeft <= dolphinRight)){
+            if (obstTop <= dolphinBottom && obstBottom >= dolphinTop){
                 playerAlive = false;
             }
         }
@@ -138,14 +140,14 @@ function moveObstacles(){
 }
 
 function moveDolphinUp(){
-    if (dolphinPositionY != 0){
-        dolphinPositionY--;
+    if (dolphPosY != 0){
+        dolphPosY--;
     }
 }
 
 function moveDolphinDown(){
-    if (dolphinPositionY != 2){
-        dolphinPositionY++;
+    if (dolphPosY != 2){
+        dolphPosY++;
     }
 }
 
