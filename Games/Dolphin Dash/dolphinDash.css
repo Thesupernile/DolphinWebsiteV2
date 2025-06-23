@@ -12,6 +12,21 @@
     border-radius: 6px;
 }
 
+.centredButton{
+    position: relative;
+    width: 12%;
+    left: 44%;
+
+}
+
+.infoScreenText{
+  text-align: center; 
+  font-size: large;
+  padding: 5%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
 .gameCanvas {
     border: solid;
     border-width: 3px;

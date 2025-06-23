@@ -6,26 +6,35 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="../../index.html"><button class="navbarButton">Back to main page</button></a>
-        <a href="../../Games/games.html"><button class="navbarButton">Games</button></a>
-        <a href="../../DolphinType/dolphinType.html"><button class="navbarButton">Discover you dolphin type</button></a>
-        <!-- <a href="../../Facts/facts.html"><button class="navbarButton">Dolphin Facts</button></a> -->
+    <div id="loadingScreen" style="position: absolute; left: 40%; top: 30%;">
+        <img src="../../Artwork/loadingAnimation.gif"></img>
+        <p id="loadText" style="text-align: center; color: aliceblue;"> Loading... </p>
     </div>
-    <br>
-    <div id="welcomeScreen" style="display: inline;" class="infoScreen">
-        <h1 style="text-align: center;">Welcome to Dolphin Dash</h1>
-        <p>The aim of the game is to score as many points as possible by guiding your dolphin around the obstacles in it's path.</p>
-        <button onclick="gameStarted()">Press to play</button>
-    </div>
-    <div id="deathScreen" style="display: none;" class="infoScreen">
-        <h1 style="text-align: center;">Game Over</h1>
-        <p id="scoreParagraph">Score: 0</p>
-        <button onclick="gameStarted()">Press to play again</button>
-    </div>
+    <div id="mainPage" style="display: none;">
+        <div class="navbar">
+            <a href="../../index.html"><button class="navbarButton">Back to main page</button></a>
+            <a href="../../Games/games.html"><button class="navbarButton">Games</button></a>
+            <a href="../../DolphinType/dolphinType.html"><button class="navbarButton">Discover you dolphin type</button></a>
+            <!-- <a href="../../Facts/facts.html"><button class="navbarButton">Dolphin Facts</button></a> -->
+        </div>
+        <br>
+        <div id="welcomeScreen" style="display: inline;" class="infoScreen">
+            <h1 style="text-align: center;">Welcome to Dolphin Dash</h1>
+            <p class="infoScreenText">The aim of the game is to score as many points as possible by guiding your dolphin around the obstacles in it's path.
+                Press W to move the dolphin upwards and S to move the dolphin downwards. As your score increases, you'll move increasingly quickly and obstacles
+                will become harder to avoid.
+            </p>
+            <p class = "infoScreenText"> Good luck :) </p>
+            <button onclick="gameStarted()" class="centredButton">Press to play</button>
+        </div>
+        <div id="deathScreen" style="display: none;" class="infoScreen">
+            <h1 style="text-align: center;">Game Over</h1>
+            <p id="scoreParagraph" class="infoScreenText">Score: 0</p>
+            <button onclick="gameStarted()" class="centredButton">Press to play again</button>
+        </div>
 
-    <canvas id="canvas" class="gameCanvas">Unfortunately, your browser does not support dolphin dash. So now you miss out on the best game ever devised by dolphins</canvas>
-
+        <canvas id="canvas" class="gameCanvas">Unfortunately, your browser does not support dolphin dash. So now you miss out on the best game ever devised by dolphins</canvas>
+    </div>
     <!-- Images used in the game must first be loaded as HTML elements -->
     <img src="../Assets/dolphinStatic.png" id="dolphinImage" style="display: none;"></image>
     <img src="../Assets/obstacleTemp.png" id="obstacleImage" style="display: none;"></image>

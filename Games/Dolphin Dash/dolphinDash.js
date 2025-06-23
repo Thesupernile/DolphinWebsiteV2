@@ -81,7 +81,7 @@ async function obstacleController(){
     // For this game, we have a random chance of spawning zero one or two obstacles in each tick
     // Ten percent Chance for 2, Thirty Percent Chance for 1 and 60% chance for 0
     let rand = Math.floor(Math.random() * 10);
-    if (rand <= 1){
+    if (rand <= 3){
         let clearSpace = Math.floor(Math.random() * 3);
         for (let i = 0; i < 3; i++){
             if (i != clearSpace){
@@ -89,7 +89,7 @@ async function obstacleController(){
             }
         }
     }
-    else if (rand <= 5){
+    else if (rand <= 6){
         createObstacle(canvas.width);
     }
     createObstacle(canvas.width);
@@ -163,7 +163,7 @@ function moveObstacles(){
         if (item.positionX < 0){
             let index = obstacles.indexOf(item);
             obstacles.splice(index, 1);
-            i--;
+            i--;  
         }
     }
 }
@@ -195,10 +195,26 @@ document.body.onkeydown = function(key){
     }
 }
 
-document.body.addEventListener("keydown", moveDolphinUp());
+function displayLoadingScreen(){
+    document.getElementById("loadText").innerHTML = "Loading...";
+    loadTimeout = setTimeout(pageLoaded, 500);
+}
 
-window.onload = window.onresize = function() {
+function pageLoaded(){
+    resizePage();
+    document.getElementById("mainPage").style.display = "block";
+    document.getElementById("loadingScreen").style.display = "none";
+}
+
+function resizePage(){
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
-    canvas.height = window.innerHeight * 0.8;
+    canvas.height = window.innerHeight * 0.7;
+}
+
+window.onload = displayLoadingScreen();
+
+
+window.onresize = function() {
+    resizePage();
 }
