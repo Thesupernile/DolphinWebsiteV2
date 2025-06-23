@@ -11,7 +11,7 @@ obstacles = [];
 const DOUBLEOBSTACLESPAWNCHANCE = 4;
 const MAXPOSXOFFSET = 800;
 const OBSTMOVESPEED = 10;
-const OBSTTICK = 750;
+const OBSTTICK = 1000;
 const DEBUGMODE = false
 
 class obstacle {
@@ -81,19 +81,21 @@ async function obstacleController(){
     // For this game, we have a random chance of spawning zero one or two obstacles in each tick
     // Ten percent Chance for 2, Thirty Percent Chance for 1 and 60% chance for 0
     let rand = Math.floor(Math.random() * 10);
-    if (rand === 0){
+    if (rand <= 1){
         let clearSpace = Math.floor(Math.random() * 3);
         for (let i = 0; i < 3; i++){
             if (i != clearSpace){
-                createObstacle(canvas.width, canvas.height * i);
+                createObstacle(canvas.width, canvas.height * i + 32);
             }
         }
     }
-    else if (rand <= 4){
+    else if (rand <= 5){
         createObstacle(canvas.width);
     }
     createObstacle(canvas.width);
-    setTimeout(obstacleController, OBSTTICK);
+    if (playerAlive){
+        obstTimeout = window.setTimeout(obstacleController, OBSTTICK);
+    }
 }
 
 function runGameFrame(){
@@ -121,9 +123,9 @@ function runGameFrame(){
 
 function createObstacle(obsPosX = null, obsPosY = null){
     if (obsPosY == null){
-        // Sets the obsPosY to one of the three preset lanes ( +52 used as a spacer)
+        // Sets the obsPosY to one of the three preset lanes ( +32 used as a spacer)
         let obsPosFormat = Math.floor(Math.random() * 3);
-        obsPosY = obsPosFormat * (canvas.height/3)  + 64;
+        obsPosY = obsPosFormat * (canvas.height/3)  + 32;
     }
     if (obsPosX == null){
         // Sets the obsPosX to the canvas width plus some random offset
@@ -138,6 +140,8 @@ function playerDied(){
     // Bring up the player death screen //
     document.getElementById("deathScreen").style.display = "inline";
     document.getElementById("scoreParagraph").innerHTML = "Score: " + score;
+    // Cancels the object spawning timer
+    window.clearTimeout(obstTimeout);
 }
 
 function gameStarted(){
@@ -159,7 +163,6 @@ function moveObstacles(){
         if (item.positionX < 0){
             let index = obstacles.indexOf(item);
             obstacles.splice(index, 1);
-            //createObstacle();
         }
     }
 }
