@@ -163,6 +163,7 @@ function moveObstacles(){
         if (item.positionX < 0){
             let index = obstacles.indexOf(item);
             obstacles.splice(index, 1);
+            i--;
         }
     }
 }
