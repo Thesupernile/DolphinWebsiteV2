@@ -10,8 +10,9 @@ obstacles = [];
 
 const DOUBLEOBSTACLESPAWNCHANCE = 4;
 const MAXPOSXOFFSET = 800;
-const OBSTACLEMOVESPEED = 10;
-const SPAWNINTERVAL = 500;
+const OBSTMOVESPEED = 10;
+const OBSTTICK = 750;
+const DEBUGMODE = false
 
 class obstacle {
     constructor(positionX, positionY, image){
@@ -31,7 +32,7 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    let dolphPosYAbs = dolphPosY * ( canvas.height / 3 ) - 20;
+    let dolphPosYAbs = dolphPosY * ( canvas.height / 3 );
     ctx.drawImage(document.getElementById("dolphinImage"), dolphPosX, dolphPosYAbs);
 
     // Draw the obstacles //
@@ -48,7 +49,7 @@ function checkForCollisions(){
 
         let dolphinLeft = dolphPosX;
         let dolphinRight = dolphinLeft + playerWidth;
-        let dolphinTop = ( dolphPosY * (canvas.width / 3) ) - 20;
+        let dolphinTop = ( dolphPosY * (canvas.height / 3) );
         let dolphinBottom = dolphinTop + playerHeight;
 
         let obstLeft = obst.positionX;
@@ -62,22 +63,48 @@ function checkForCollisions(){
                 playerAlive = false;
             }
         }
+
+        // DEBUG
+        if (DEBUGMODE){
+            // Draws corners of the dolphin hitbox
+            ctx.fillStyle = "red";
+            ctx.fillRect(dolphinLeft, dolphinTop, 5, 5);
+            ctx.fillRect(dolphinLeft, dolphinBottom - 5, 5, 5);
+            ctx.fillRect(dolphinRight - 5, dolphinTop, 5, 5);
+            ctx.fillRect(dolphinRight - 5, dolphinBottom - 5, 5, 5);
+        }
     }
 }
 
 async function obstacleController(){
-    // Spawns new obstacles at a regular time interval
+    // Spawns new obstacles at a regular time interval (CONST OBSTTICK)
+    // For this game, we have a random chance of spawning zero one or two obstacles in each tick
+    // Ten percent Chance for 2, Thirty Percent Chance for 1 and 60% chance for 0
+    let rand = Math.floor(Math.random() * 10);
+    if (rand === 0){
+        let clearSpace = Math.floor(Math.random() * 3);
+        for (let i = 0; i < 3; i++){
+            if (i != clearSpace){
+                createObstacle(canvas.width, canvas.height * i);
+            }
+        }
+    }
+    else if (rand <= 4){
+        createObstacle(canvas.width);
+    }
+    createObstacle(canvas.width);
+    setTimeout(obstacleController, OBSTTICK);
 }
 
 function runGameFrame(){
 
     moveObstacles();
-    
-    // Check for collisions //
-    checkForCollisions();
 
     // Draw the canvas //
     drawCanvas();
+
+    // Check for collisions //
+    checkForCollisions();
 
     // Increase score //
     score++;
@@ -110,6 +137,7 @@ function createObstacle(obsPosX = null, obsPosY = null){
 function playerDied(){
     // Bring up the player death screen //
     document.getElementById("deathScreen").style.display = "inline";
+    document.getElementById("scoreParagraph").innerHTML = "Score: " + score;
 }
 
 function gameStarted(){
@@ -119,9 +147,6 @@ function gameStarted(){
     playerAlive = true;
     score = 0;
     obstacles = [];
-    for (let i = 0; i < numberOfObstacles; i++){
-        createObstacle();
-    }
     runGameFrame();
     obstacleController();
 }
@@ -129,7 +154,7 @@ function gameStarted(){
 function moveObstacles(){
     for (let i = 0; i < obstacles.length; i++){
         let item = obstacles[i];
-        item.positionX -= OBSTACLEMOVESPEED;
+        item.positionX -= OBSTMOVESPEED;
         // Remove the obstacle if it is off the other side of the map
         if (item.positionX < 0){
             let index = obstacles.indexOf(item);
