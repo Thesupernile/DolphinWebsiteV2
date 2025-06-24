@@ -8,11 +8,15 @@ score = 0;
 numberOfObstacles = 3;
 obstacles = [];
 
+const OBSTSPEEDINIT = 10;
+const OBSTSPEEDMAX = 30;
+const SPEEDRAMPUPTIME = 3600;
 const DOUBLEOBSTACLESPAWNCHANCE = 4;
 const MAXPOSXOFFSET = 800;
-const OBSTMOVESPEED = 10;
-const OBSTTICK = 1000;
-const DEBUGMODE = false
+const OBSTTICK = 1500;
+const DEBUGMODE = false;
+
+obstMoveSpeed = OBSTSPEEDINIT;
 
 class obstacle {
     constructor(positionX, positionY, image){
@@ -94,7 +98,10 @@ async function obstacleController(){
     }
     createObstacle(canvas.width);
     if (playerAlive){
-        obstTimeout = window.setTimeout(obstacleController, OBSTTICK);
+        //
+        const playerSpeedMulti = ((obstMoveSpeed) / OBSTSPEEDINIT) + 1;
+
+        obstTimeout = window.setTimeout(obstacleController, OBSTTICK / playerSpeedMulti);   
     }
 }
 
@@ -118,6 +125,10 @@ function runGameFrame(){
     else{
         // The game will run at aprox 60fps with delay time of 17ms //
         nextFrame = setTimeout(runGameFrame, 17);
+        if (obstMoveSpeed < OBSTSPEEDMAX){
+            let obstSpeedInrease = (OBSTSPEEDMAX - OBSTSPEEDINIT) / SPEEDRAMPUPTIME;
+            obstMoveSpeed += obstSpeedInrease;
+        }
     }
 }
 
@@ -151,6 +162,7 @@ function gameStarted(){
     playerAlive = true;
     score = 0;
     obstacles = [];
+    obstMoveSpeed = OBSTSPEEDINIT;
     runGameFrame();
     obstacleController();
 }
@@ -158,7 +170,7 @@ function gameStarted(){
 function moveObstacles(){
     for (let i = 0; i < obstacles.length; i++){
         let item = obstacles[i];
-        item.positionX -= OBSTMOVESPEED;
+        item.positionX -= obstMoveSpeed;
         // Remove the obstacle if it is off the other side of the map
         if (item.positionX < 0){
             let index = obstacles.indexOf(item);
