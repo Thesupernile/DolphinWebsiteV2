@@ -12,6 +12,18 @@
     border-radius: 6px;
 }
 
+.scoreBox{
+  position: absolute;
+  margin-left: 4%;
+  padding: 1%;  
+  margin-top: 0%;
+  width: 5%;
+  background-color: rgb(72, 122, 222);
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
+
 .centredButton{
     position: relative;
     width: 12%;

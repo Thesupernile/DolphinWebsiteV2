@@ -13,7 +13,7 @@ const OBSTSPEEDMAX = 30;
 const SPEEDRAMPUPTIME = 3600;
 const DOUBLEOBSTACLESPAWNCHANCE = 4;
 const MAXPOSXOFFSET = 800;
-const OBSTTICK = 1500;
+const OBSTTICK = 1800;
 const DEBUGMODE = false;
 
 obstMoveSpeed = OBSTSPEEDINIT;
@@ -22,8 +22,8 @@ class obstacle {
     constructor(positionX, positionY, image){
         this.positionX = positionX;
         this.positionY = positionY;
-        this.width = 64;
-        this.height = 64;
+        this.width = 128;
+        this.height = 128;
         this.image = image;
     }
 }
@@ -36,7 +36,8 @@ function drawCanvas(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the dolphin //
-    let dolphPosYAbs = dolphPosY * ( canvas.height / 3 );
+    // Dolphin Position is the middle of the player
+    let dolphPosYAbs = dolphPosY * ( canvas.height / 3 ) + canvas.height/12;
     ctx.drawImage(document.getElementById("dolphinImage"), dolphPosX, dolphPosYAbs);
 
     // Draw the obstacles //
@@ -117,6 +118,7 @@ function runGameFrame(){
 
     // Increase score //
     score++;
+    document.getElementById("scoreBox").innerHTML = "Score: " + score;
 
     // If player has died, bring up death screen //
     if (playerAlive == false){
@@ -221,7 +223,7 @@ function pageLoaded(){
 function resizePage(){
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.9;
-    canvas.height = window.innerHeight * 0.7;
+    canvas.height = window.innerHeight * 0.8;
 }
 
 window.onload = displayLoadingScreen();
