@@ -28,6 +28,18 @@ class obstacle {
     }
 }
 
+const loadingScreenMessages = {
+    0: "Loading...",
+    1: "Finding fishes...",
+    2: "Dodging sharks...",
+    3: "Blowing bubbles...",
+    4: "Speaking calculus...",
+    5: "Cleaning the oceans...",
+    6: "Logging star movements...",
+    7: "Tracking dolphin types...",
+    8: "Searching for dolphins..."
+}
+
 
 function drawCanvas(){
     // Clear the canvas // 
@@ -153,6 +165,7 @@ function playerDied(){
     // Bring up the player death screen //
     document.getElementById("deathScreen").style.display = "inline";
     document.getElementById("scoreParagraph").innerHTML = "Score: " + score;
+    document.getElementById("scoreBox").style.display = "none";
     // Cancels the object spawning timer
     window.clearTimeout(obstTimeout);
 }
@@ -161,6 +174,7 @@ function gameStarted(){
     // Revive the player and hide the welcome screen/death screen //
     document.getElementById("welcomeScreen").style.display = "none";
     document.getElementById("deathScreen").style.display = "none";
+    document.getElementById("scoreBox").style.display = "inline";
     playerAlive = true;
     score = 0;
     obstacles = [];
@@ -210,8 +224,10 @@ document.body.onkeydown = function(key){
 }
 
 function displayLoadingScreen(){
-    document.getElementById("loadText").innerHTML = "Loading...";
-    loadTimeout = setTimeout(pageLoaded, 500);
+    let loadMessageNum = Math.floor(Math.random() * 9);
+    document.getElementById("loadingScreen").style.display = "block";
+    document.getElementById("loadText").innerHTML = loadingScreenMessages[loadMessageNum];
+    timeout = setTimeout(pageLoaded, 500);
 }
 
 function pageLoaded(){

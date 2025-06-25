@@ -17,11 +17,12 @@
   margin-left: 4%;
   padding: 1%;  
   margin-top: 0%;
-  width: 5%;
-  background-color: rgb(72, 122, 222);
+  width: 8%;
+  background-color: rgb(1, 27, 178);
   border-radius: 5px;
   border-style: solid;
   border-color: black;
+  display: none;
 }
 
 .centredButton{
