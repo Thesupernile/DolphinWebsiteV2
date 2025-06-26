@@ -5,6 +5,7 @@ dolphPosY = 2;
 playerWidth = 128;
 playerHeight = 128;
 score = 0;
+highestScore = 0;
 numberOfObstacles = 3;
 obstacles = [];
 
@@ -36,8 +37,9 @@ const loadingScreenMessages = {
     4: "Speaking calculus...",
     5: "Cleaning the oceans...",
     6: "Logging star movements...",
-    7: "Tracking dolphin types...",
-    8: "Searching for dolphins..."
+    7: "Finding dolphins to dash...",
+    8: "Searching for dolphins...",
+    9: "Locating life rings..."
 }
 
 
@@ -83,7 +85,7 @@ function checkForCollisions(){
 
         // DEBUG
         if (DEBUGMODE){
-            // Draws corners of the dolphin hitbox
+            // Draws red corners of the dolphin hitbox
             ctx.fillStyle = "red";
             ctx.fillRect(dolphinLeft, dolphinTop, 5, 5);
             ctx.fillRect(dolphinLeft, dolphinBottom - 5, 5, 5);
@@ -96,7 +98,6 @@ function checkForCollisions(){
 async function obstacleController(){
     // Spawns new obstacles at a regular time interval (CONST OBSTTICK)
     // For this game, we have a random chance of spawning zero one or two obstacles in each tick
-    // Ten percent Chance for 2, Thirty Percent Chance for 1 and 60% chance for 0
     let rand = Math.floor(Math.random() * 10);
     if (rand <= 3){
         let clearSpace = Math.floor(Math.random() * 3);
@@ -111,7 +112,7 @@ async function obstacleController(){
     }
     createObstacle(canvas.width);
     if (playerAlive){
-        //
+        // Player speed multi is used to ensure that the obstacles spawn at the same distance interval regardless of player speed
         const playerSpeedMulti = ((obstMoveSpeed) / OBSTSPEEDINIT) + 1;
 
         obstTimeout = window.setTimeout(obstacleController, OBSTTICK / playerSpeedMulti);   
@@ -162,9 +163,12 @@ function createObstacle(obsPosX = null, obsPosY = null){
 }
 
 function playerDied(){
-    // Bring up the player death screen //
+    // Update highscore 
+    if (score > highestScore){ highestScore = score; }
+    // Bring up the player death screen and update text
     document.getElementById("deathScreen").style.display = "inline";
     document.getElementById("scoreParagraph").innerHTML = "Score: " + score;
+    document.getElementById("highScoreParagraph").innerHTML = "High Score: " + highestScore;
     document.getElementById("scoreBox").style.display = "none";
     // Cancels the object spawning timer
     window.clearTimeout(obstTimeout);
@@ -224,7 +228,7 @@ document.body.onkeydown = function(key){
 }
 
 function displayLoadingScreen(){
-    let loadMessageNum = Math.floor(Math.random() * 9);
+    let loadMessageNum = Math.floor(Math.random() * 10);
     document.getElementById("loadingScreen").style.display = "block";
     document.getElementById("loadText").innerHTML = loadingScreenMessages[loadMessageNum];
     timeout = setTimeout(pageLoaded, 500);
