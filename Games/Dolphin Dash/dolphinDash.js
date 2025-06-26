@@ -9,12 +9,12 @@ highestScore = 0;
 numberOfObstacles = 3;
 obstacles = [];
 
-const OBSTSPEEDINIT = 10;
-const OBSTSPEEDMAX = 30;
-const SPEEDRAMPUPTIME = 3600;
+const OBSTSPEEDINIT = 15;
+const OBSTSPEEDMAX = 40;
+const SPEEDRAMPUPTIME = 7200;
 const DOUBLEOBSTACLESPAWNCHANCE = 4;
 const MAXPOSXOFFSET = 800;
-const OBSTTICK = 1800;
+const OBSTTICK =  20000 / OBSTSPEEDINIT;
 const DEBUGMODE = false;
 
 obstMoveSpeed = OBSTSPEEDINIT;
@@ -130,7 +130,7 @@ function runGameFrame(){
     checkForCollisions();
 
     // Increase score //
-    score++;
+    score += Math.floor(obstMoveSpeed / 10);
     document.getElementById("scoreBox").innerHTML = "Score: " + score;
 
     // If player has died, bring up death screen //
