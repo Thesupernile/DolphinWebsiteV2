@@ -17,5 +17,17 @@
     <div id="mainPage">
         <h1 class="pageTitle"> Dolphin Facts </h1>
         <p style="text-align: center; font-size: xx-large;"> Unfortunately, dolphin facts is still a work in progress...</p>
+        <div class="dolphinButtons">
+            <button class="dolphinSelectButton" onclick="bottlenoseButtonClicked()"> Bottlenose </button>
+            <button class="dolphinSelectButton" onclick="orcaButtonClicked()"> Orca </button>
+            <button class="dolphinSelectButton" onclick="spinnerButtonClicked()"> Spinner Dolphin </button>
+            <button class="dolphinSelectButton" onclick="amazonRiverButtonClicked()"> Amazon River Dolphin </button>
+        </div>
+        <div id = "dolphinFacts" class="dolphinFacts">
+            <p id = "habitatInfo" class="infoParagraph"> Habitat info goes here </p>
+            <p id = "dietInfo" class="infoParagraph"> Diet info goes here </p>
+            <p id = "additionalFacts" class="infoParagraph"> Any additional facts go here </p>
+        </div>
     </div>
 </body>
+<script src="facts.js"></script>
