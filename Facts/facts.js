@@ -1,21 +1,54 @@
-function showInfoScreen(textOption){
-    // 0 is bottlenose, 1 is orca, 2 is spinner and 3 is amazon river dolphin
-    let habitatFilepath = "InfoParagraphs/Habitat-" + textOption + ".txt";
-    let dietFilepath = "InfoParagraphs/Diet-" + textOption + ".txt";
-    let additionalFactFilepath = "InfoParagraphs/AdditionalFacts-" + textOption + ".txt";
+const bottlenoseHabitat = "Bottlenose Habitat";
+const bottlenoseDiet = "Bottlenose Diet";
+const bottlenoseAdditionalFacts = "Extra Bottlenose Facts";
+const orcaHabitat = "";
+const orcaDiet = "";
+const orcaAdditionalFacts = "";
 
+const spinnerHabitat = "";
+const spinnerDiet = "";
+const spinnerAdditionalFacts = "";
+
+const amazonRiverHabitat = "";
+const amazonRiverDiet = "";
+const amazonRiverAdditionalFacts = "";
+
+
+function showInfoScreen(textOption){
     let habitatText;
     let dietText;
     let additionalText;
 
-    var reader = new FileReader();
+    switch (textOption){
+        case "Bottlenose":
+            habitatText = bottlenoseHabitat;
+            dietText = bottlenoseDiet;
+            additionalText = bottlenoseAdditionalFacts;
+            break;
+        case "Orca":
+            habitatText = orcaHabitat;
+            dietText = orcaDiet;
+            additionalText = orcaAdditionalFacts;
+            break;
+        case "Spinner":
+            habitatText = spinnerHabitat;
+            dietText = spinnerDiet;
+            additionalText = spinnerAdditionalFacts;
+            break;
+        case "AmazonRiver":
+            habitatText = amazonRiverHabitat;
+            dietText = amazonRiverDiet;
+            additionalText = amazonRiverAdditionalFacts;
+            break;
+    }
 
-    habitatText = reader.readAsText(habitatFilepath);
 
     document.getElementById("habitatInfo").innerHTML = habitatText;
     document.getElementById("dietInfo").innerHTML = dietText;
     document.getElementById("additionalInfo").innerHTML = additionalText;
 
+
+    document.getElementById("dolphinFacts").style.display = "block";
 }
 
 

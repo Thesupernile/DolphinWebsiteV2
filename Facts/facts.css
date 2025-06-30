@@ -12,6 +12,10 @@ body {
   text-align: center;
 }
 
+h1{
+  color: aliceblue;
+}
+
 .dolphinButtons{
   width: 90%;
   margin: 5%;
@@ -30,6 +34,7 @@ body {
     border-color: rgb(1, 15, 96);
     border-width: 4px;
     border-radius: 6px;
+    display: none;
 }
 
 .infoParagraph{
