@@ -10,9 +10,9 @@ const spinnerHabitat = "Spinner dolphins are found in tropical and subropical wa
 const spinnerDiet = "Spinner dolphins typically eat small fish, shrimp, squid and other small shallow water marine animals. Spinner dolphins hunt at night, when their prey species have moved from deep open waters into shallower costal waters. ";
 const spinnerAdditionalFacts = "Spinner dolphins are named for their tendancy to leap and spin out of the water. Their latin name however, longirostris, means long beak named for their thinly shaped nose. Spinner dolphins are capable of spinning up to six times in a single leap. Spinner dolphins are relatively small compared to other dolphin species measuring between 1.5 and 2.1 metres long. During rest, spinner dolphins move in large groups as a single unit, spaced just widely enough not to hit into eachother. When ending their rest period, spinner dolphins swim towards open waters and then back to the coast in a zig zag pattern. It's thought that this movement is a social cue to coordinate their movements after a period of rest.";
 
-const amazonRiverHabitat = "";
-const amazonRiverDiet = "";
-const amazonRiverAdditionalFacts = "";
+const amazonRiverHabitat = "Amazon river dolphins have the widest range of any river dolphin. They inhabit almost the entire amazon river basin, an area spanning 7 million square kilometres. Some subspecies have become completely isolated due to rapids and waterfalls preventing their movements, causing slight genetic deviations between species. During the dry season, dolphins are confined to the deepest parts of the river beds however in the wet season the dolphins disperse across the flooded areas, allowing them a greater range to hunt.";
+const amazonRiverDiet = "Amazon river dolphins have a wide ranging diet consisting of catfish, piranhas, river turtles, crabs, frogs and croakers. In total, their diet consists of over fifty three different species of fish.";
+const amazonRiverAdditionalFacts = "The amazon river dolphin is the world's largest species of river dolphin with fully grown adult males can measure up to 2.5m. Although they're born grey, amazon river dolphins become more pink as they mature with males being typically pinker than females. This lends them one of their nicknames, the pink river dolphin.";
 
 
 function showInfoScreen(textOption){
